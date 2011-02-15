@@ -19,16 +19,19 @@ function! s:TaskDone()
     let line = getline(".")
     if (line =~ '-\{1}\s')
        let line2 = substitute(line, "-", "+", "")
+       call setline(".", line2)
        echo "task done"
     elseif (line =~ '+\{1}\s')
         let line2 = substitute(line, "+", "-", "")
+        call setline(".", line2)
         echo "task undone"
     elseif (line =~ '>\{1}\s')
         let line2 = substitute(line, ">", "+", "")
+        call setline(".", line2)
         echo "important task done"
     else    
+        echo "It's not a task"
     endif
-    call setline(".", line2)
 endfunction
 
 " function TaskImportant to toggle important status
@@ -36,13 +39,15 @@ function! s:TaskImportant()
     let line = getline(".")
     if (line =~ '-\{1}\s')
         let line2 = substitute(line, "-", ">", "")
+        call setline(".", line2)
         echo "important task"
     elseif (line =~ '>\{1}\s')
         let line2 = substitute(line, ">", "-", "")
+        call setline(".", line2)
         echo "normal task"
     else
+        echo "It's not a task"
     endif
-    call setline(".", line2)
 endfunction
 
 " Set up mappings
