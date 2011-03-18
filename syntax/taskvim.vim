@@ -10,7 +10,8 @@
 syn case ignore
 
 set background=dark
-
+" set background=white
+if g:taskvim_theme=
 "Text, comment, description
 syn match taskText /^\w\+.*[^:]$/
 hi taskText guifg=#6D9CBD gui=italic

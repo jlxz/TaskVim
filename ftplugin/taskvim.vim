@@ -6,7 +6,7 @@
 " Maintainer:	Jose Luis Diaz Gonzalez
 " URL:		http://joseluisdgz.com/projects/taskvim/
 " Version:	0.1
-" Last Change:  11/02/2011
+" Last Change:  18/03/2011
 
 " check if the plugin is already loaded
 if exists("loaded_task_vim")
@@ -56,3 +56,13 @@ noremap <unique> <script> <Plug>TaskImportant   :call <SID>TaskImportant()<CR>
 
 map <buffer> <silent> <F2> <Plug>TaskDone
 map <buffer> <silent> <F3> <Plug>TaskImportant
+
+" Autocreate list items
+setl comments=b:-,b:*,b:>
+setl formatlistpat=^\\s*[->*]\\s*
+setlocal formatoptions=tnro
+
+" Set up list formating 
+set autoindent
+setl wrap
+
