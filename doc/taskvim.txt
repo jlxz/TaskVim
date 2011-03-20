@@ -2,7 +2,7 @@
 
 Jose Luis Diaz Gonzalez <jlx.dgz@gmail.com>
 
-14th February 2011
+20th March 2011
 
 ==============================================================================
 ABOUT                                               *taskvim-about*
@@ -70,10 +70,20 @@ FILETYPE PLUGIN                                              *taskvim-ftplugin*
 The file-type plugin tries to make editing TaskVim files in Vim more
 comfortable. 
 
-The plugin defines some new mappings: 
+The plugin defines some new mappings. 
 
+Now the mappins depends on the platform you are using (trying to be more os-friendly):
+If you are using MacVim:
+    <Leader>2   Mark task done
+    <Leader>3   Mark task as important
+
+The default setting for the 'mapleader' variable is backslash ('\'). You can config other mapleader (most common and productive is ',').
+
+If you are using GVim in other platforms:
     F2     Mark task as done
     F3     Mark task as important
+
+The plugin now auto saves your taskvim file when your window editor loses focus. So if you are editing your tasks, and then you start doing anything else, your changes are saved automatically and silently.
 
 ==============================================================================
 FILETYPE DETECT                                             *taskvim-ftdetect*

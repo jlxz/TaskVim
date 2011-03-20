@@ -1,9 +1,9 @@
 " Vim syntax file
 " Language:     Taskvim (http://joseluisdgz.com/projects/taskvim)
-" Maintainer:   Jose Luis Diaz Gonzalez <jlx.dgz@gmail.com>
+" Maintainer:   Jose Luis Diaz Gonzalez <joseluisdgz@gmail.com>
 " URL: 
 " Version:      1
-" Last Change: 19 Mar 2011
+" Last Change: 20 Mar 2011
 
 " Filename: taskvim.txt
 
