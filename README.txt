@@ -1,6 +1,6 @@
 *taskvim* TaskVim file-type plugin and syntax file
 
-Jose Luis Diaz Gonzalez <jlx.dgz@gmail.com>
+Jose Luis Diaz Gonzalez <joseluisdgz@gmail.com>
 
 20th March 2011
 
