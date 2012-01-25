@@ -6,7 +6,7 @@
 " Maintainer:	Jose Luis Diaz Gonzalez
 " URL:		http://joseluisdgz.com/projects/taskvim/
 " Version:	0.1
-" Last Change:  20/03/2011
+" Last Change:  18/03/2011
 
 " check if the plugin is already loaded
 if exists("loaded_task_vim")

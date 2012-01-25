@@ -9,5 +9,5 @@
 " Last Change:  15/02/2011
  
 augroup taskvim
-     au! BufRead,BufNewFile *.taskvim.txt setfiletype taskvim
+     au! BufRead,BufNewFile *.taskvim.txt setlocal filetype=taskvim
 augroup END
