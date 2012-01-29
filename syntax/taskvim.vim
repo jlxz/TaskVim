@@ -2,71 +2,50 @@
 " Language:     Taskvim (http://joseluisdgz.com/projects/taskvim)
 " Maintainer:   Jose Luis Diaz Gonzalez <jlx.dgz@gmail.com>
 " URL: 
-" Version:      1
-" Last Change: 19 Mar 2011
+" Version:      0.2
+" Last Change: 26 Ene 2012
 
 " Filename: taskvim.txt
 
-syn case ignore
-"hi clear
-
+" add compatibility checks
 " Quit when a (custom) syntax file was already loaded
 if exists("b:current_syntax")
   finish
 endif
 
-"hi Normal guifg=white guibg=black gui=NONE
-"hi LineNr guifg=#3D3D3D guibg=black gui=NONE
-"hi Cursor guifg=black guibg=white gui=NONE
+syn case ignore
 
-syn match taskText /^\w\+.*[^:]$/ "Text, comment, description
-syn match taskChar /^\s*[-—]\s\+/ "/-\{1}\s/ - active and pending task 
-syn region taskDone start=/+\{1}\s/ end=/$/ "+ done task
-syn match taskTag  /\s@\{1}.*/ "/@\{1}.*/ @tag or @context
-syn match taskRaw /\*\{1}\s.*/ "* quick note or comment about the project/area
-syn match taskPriority />\{1}\s.*/ contains=taskTag "> important task
-syn match Project /^.\+:\s*$/ "/^\w.*:\{1}/ Project or Area
-syn match taskCode /.\+:\s\+/ contains=taskChar
+"Text, comment, description
+syn match taskText /^\w\+.*[^:]$/ 
+syn match taskChar /[-—]/ contained
+"Normal task line active and pending task
+syn match taskTask /[-—]\s.*$/ contains=taskChar,taskCode,taskTag,taskVersion 
+"+ done task
+syn match taskDone /+\s.*$/ "contains=taskTag,taskCode
+"@tag or @context
+syn match taskTag  /@\S*/ contained 
+"* quick note or comment about the project/area
+"syn match taskRaw /\*\{1}\s.*/ 
+"> important task
+syn match taskPriority />\s.*$/ contains=taskCode,taskTag,taskVersion 
+"Project or Area
+syn match taskProject /^.\+:\s*$/ 
+syn match taskCode /\s\S\+:\s/ contained 
+"v0.1 version numbers
+syn match taskVersion /v\d\{1,2}\.\d\{1,2}\s\+/ contained
+" folding
+syn region taskFold start=/^.*:\s*$/ end=/^\s*$/ transparent fold
 
-if &background == "dark"
     hi def link taskText Type
-    hi def link taskChar PreProc
+    hi def link taskChar Title
     hi def link taskDone Comment
-    hi def link taskTag PreProc
-    hi def link taskRaw Statement
+    hi def link taskTag Constant
+    "hi def link taskRaw PreProc
     hi def link taskPriority Special
-    hi def link Project Identifier
-    hi def link taskCode Constant
+    hi def link taskProject Identifier
+    hi def link taskCode Statement
+    hi def link taskVersion Type
 
-"Better cursor line to match colors
-"hi CursorLine guifg=NONE guibg=#333433 gui=NONE
-"hi StatusLine guifg=#CCCCCC guibg=#202020 gui=italic 
-
-elseif &background == "light"
-"hi Normal guifg=black guibg=white gui=NONE
-"hi LineNr guifg=white guibg=lightgrey gui=NONE
-"hi Cursor guifg=white guibg=black gui=NONE
-
-    hi taskText guifg=#5C84A0 gui=italic
-    hi taskChar guifg=#C37310
-    hi taskDone guifg=#B9B8BF gui=italic
-    hi taskTag guifg=#CD8E2C
-    hi taskRaw guifg=#57751D
-    hi taskPriority guifg=#B6000D
-    hi Project guifg=#1A526D
-
-"Better cursor line to match colors
-"hi CursorLine guifg=NONE guibg=#FFF7BF gui=NONE
-"hi StatusLine guifg=#414042 guibg=#C3BEC3 gui=italic 
-endif
-
-"hi taskText guifg=#6D9CBD gui=italic
-"hi taskChar guifg=Orange
-"hi taskDone guifg=#666666 gui=italic
-"hi taskTag guifg=#FFCC33
-"hi taskRaw guifg=#99CC33
-"hi taskPriority guifg=#DA4839
-"hi Project guifg=#3399CC
-"hi taskCode 
+syn sync fromstart
 
 let b:current_syntax = "taskvim"
