@@ -1,7 +1,7 @@
 " Vim syntax file
-" Language:     Taskvim (http://joseluisdgz.com/projects/taskvim)
-" Maintainer:   Jose Luis Diaz Gonzalez <jlx.dgz@gmail.com>
-" URL: 
+" Language:     Taskvim 
+" Maintainer:   Jose Luis Diaz Gonzalez <joseluisdgz@me.com>
+" URL: http://joseluisdgz.com/projects/taskvim
 " Version:      0.2
 " Last Change: 26 Ene 2012
 

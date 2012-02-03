@@ -3,9 +3,9 @@
 " 'stealed' some code and learned a lot from the great plugin TaskPaper for Vim by David O'Callaghan
 " http://www.cs.tcd.ie/David.OCallaghan/taskpaper.vim/
 " Language: TaskVim
-" Maintainer: Jose Luis Diaz Gonzalez
+" Maintainer: Jose Luis Diaz Gonzalez <joseluisdgz@me.com>
 " URL: http://joseluisdgz.com/projects/taskvim/
-" Version: 0.1
+" Version: 0.2
 " Last Change: 29/01/2012
 
 " check if the plugin is already loaded
