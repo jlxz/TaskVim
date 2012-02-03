@@ -2,7 +2,7 @@
 
 Jose Luis Diaz Gonzalez <joseluisdgz@gmail.com>
 
-20th March 2011
+3rd February 2012
 
 ==============================================================================
 ABOUT                                               *taskvim-about*
@@ -22,7 +22,7 @@ and also on github https://github.com/davidoc/taskpaper.vim
 ==============================================================================
 INSTALLATION                                        *taskvim-installation*
 
-Unpack the archivo to ~/.vim.
+Unpack the archive to ~/.vim.
 It contains the following files:
 
     doc/taskvim.txt
@@ -45,16 +45,20 @@ SYNTAX                                              *taskvim-syntax*
 
 You have 5 main elements: 
     - Projects: 
+    - Task Code:
     - Tasks: 
     - Important Tasks: 
-    - Quick notes: 
     - Tags: 
 
 The syntax file highlights all these elements with predefined colors. 
 
 To define a project write some text at the begining of a line ending in a colon.  
 
-A task is a line beginning with '-' and can have zero or more tags.
+To assign a code to a task type a non-spaced code at the beginning of the task ending in a colon.
+
+A task is a line beginning with '-' or '—' and can have zero or more tags.
+
+If you press 'o' or '<cr>' on a task line, it will create a new task in the next line.
 
 An important task is a line beginning with '>' and can have zero or more context tags.
 
@@ -84,6 +88,17 @@ If you are using GVim in other platforms:
     F3     Mark task as important
 
 The plugin now auto saves your taskvim file when your window editor loses focus. So if you are editing your tasks, and then you start doing anything else, your changes are saved automatically and silently.
+
+==============================================================================
+DEFAULT CONFIG                                             *taskvim-config*
+
+The plugin configure the next vim options to manage list in a better way:
+
+    * added — (DASH EM) as a comment
+    * formatoptions=qro1
+    * textwidth=0 and wrapmargin=0 to avoid hard-wrap on list items
+    * autoindent
+
 
 ==============================================================================
 FILETYPE DETECT                                             *taskvim-ftdetect*
