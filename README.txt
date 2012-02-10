@@ -4,7 +4,7 @@ Jose Luis Diaz Gonzalez <joseluisdgz@me.com>
 
 10th February 2012
 
-![TaskVim](https://skitch.com/joseluisdgz/8ytar/taskvim)
+[TaskVim](http://skitch.com/joseluisdgz/8ytar/taskvim)
 
 ==============================================================================
 ABOUT                                               *taskvim-about*
