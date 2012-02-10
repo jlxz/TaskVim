@@ -3,10 +3,10 @@
 " 'stealed' some code and learned a lot from the great plugin TaskPaper for Vim by David O'Callaghan
 " http://www.cs.tcd.ie/David.OCallaghan/taskpaper.vim/
 " Language: TaskVim
-" Maintainer: Jose Luis Diaz Gonzalez <joseluisdgz@me.com>
+" Maintainer: Jose Luis Diaz Gonzalez
 " URL: http://joseluisdgz.com/projects/taskvim/
-" Version: 0.2
-" Last Change: 29/01/2012
+" Version: 0.3
+" Last Change: 10/02/2012
 
 " check if the plugin is already loaded
 if exists("loaded_task_vim")
@@ -34,6 +34,27 @@ function! s:TaskDone()
     endif
 endfunction
 
+" function TaskWaiting to toggle waiting status
+function! s:TaskWait()
+    let line = getline(".")
+    if (line =~ '—\{1}\s')
+       let line2 = substitute(line, "—", "?", "")
+       call setline(".", line2)
+       echo "task waiting"
+    elseif (line =~ '?\{1}\s')
+        let line2 = substitute(line, "?", "—", "")
+        call setline(".", line2)
+        echo "task active"
+    elseif (line =~ '>\{1}\s')
+        let line2 = substitute(line, ">", "?", "")
+        call setline(".", line2)
+        echo "important task waiting"
+    else    
+        echo "It's not a task"
+    endif
+endfunction
+
+
 " function TaskImportant to toggle important status
 function! s:TaskImportant()
     let line = getline(".")
@@ -53,18 +74,23 @@ endfunction
 " Set up mappings
 noremap <unique> <script> <Plug>TaskDone        :call <SID>TaskDone()<CR>
 noremap <unique> <script> <Plug>TaskImportant   :call <SID>TaskImportant()<CR>
+noremap <unique> <script> <Plug>TaskWait        :call <SID>TaskWait()<CR>
 
 if has("gui_macvim")
     nmap <buffer> <silent> <Leader>2 <Plug>TaskDone
     nmap <buffer> <silent> <Leader>3 <Plug>TaskImportant
+    nmap <buffer> <silent> <Leader>4 <Plug>TaskWait
 else
     nmap <buffer> <silent> <F2> <Plug>TaskDone
     nmap <buffer> <silent> <F3> <Plug>TaskImportant
+    nmap <buffer> <silent> <F4> <Plug>TaskWait
 endif
 
 " Autocreate list items
 setlocal comments+=b:—,
 setlocal formatoptions=qro1
+"add '@' to keyword character set so that we can complete contexts as keywords
+setlocal iskeyword+=@-@
 " Set up list formating 
 " almost perfect config for list handling
 setlocal autoindent
@@ -74,6 +100,7 @@ setlocal nolist
 
 "fold projects
 setlocal foldmethod=syntax
+setlocal foldlevel=99
 
 " Set up save on Focus Lost
 au FocusLost * :wa

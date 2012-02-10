@@ -1,9 +1,9 @@
 " Vim syntax file
-" Language:     Taskvim 
-" Maintainer:   Jose Luis Diaz Gonzalez <joseluisdgz@me.com>
-" URL: http://joseluisdgz.com/projects/taskvim
-" Version:      0.2
-" Last Change: 26 Ene 2012
+" Language:     Taskvim (http://joseluisdgz.com/projects/taskvim)
+" Maintainer:   Jose Luis Diaz Gonzalez <jlx.dgz@gmail.com>
+" URL: 
+" Version:      0.3
+" Last Change: 10 Feb 2012
 
 " Filename: taskvim.txt
 
@@ -19,15 +19,19 @@ syn case ignore
 syn match taskText /^\w\+.*[^:]$/ 
 syn match taskChar /[-—]/ contained
 "Normal task line active and pending task
-syn match taskTask /[-—]\s.*$/ contains=taskChar,taskCode,taskTag,taskVersion 
+syn match taskTask /[-—]\s.*$/ contains=taskChar,taskCode,taskTag,taskVersion,taskDate 
 "+ done task
 syn match taskDone /+\s.*$/ "contains=taskTag,taskCode
+"? waiting task
+syn match taskWait /?\s.*$/ 
 "@tag or @context
-syn match taskTag  /@\S*/ contained 
+syn match taskTag  /@\S*/ contained
+" date to complete the task
+syn match taskDate /#\S*/ contained
 "* quick note or comment about the project/area
 "syn match taskRaw /\*\{1}\s.*/ 
 "> important task
-syn match taskPriority />\s.*$/ contains=taskCode,taskTag,taskVersion 
+syn match taskPriority />\s.*$/ contains=taskCode,taskTag,taskVersion,taskDate
 "Project or Area
 syn match taskProject /^.\+:\s*$/ 
 syn match taskCode /\s\S\+:\s/ contained 
@@ -45,6 +49,8 @@ syn region taskFold start=/^.*:\s*$/ end=/^\s*$/ transparent fold
     hi def link taskProject Identifier
     hi def link taskCode Statement
     hi def link taskVersion Type
+    hi def link taskDate Error
+    hi def link taskWait Todo
 
 syn sync fromstart
 

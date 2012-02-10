@@ -5,9 +5,9 @@
 " Language: TaskVim 
 " Maintainer: Jose Luis Diaz Gonzalez
 " URL: http://joseluisdgz.com/projects/taskvim/
-" Version: 0.2
-" Last Change: 15/02/2011
+" Version: 0.3
+" Last Change: 10/02/2012
  
 augroup taskvim
-     au! BufRead,BufNewFile *.taskvim.txt setlocal filetype=taskvim
+     au! BufRead,BufNewFile *.taskvim.txt set filetype=taskvim
 augroup END
