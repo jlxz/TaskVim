@@ -33,7 +33,8 @@ syn match taskDate /#\S*/ contained
 "> important task
 syn match taskPriority />\s.*$/ contains=taskCode,taskTag,taskVersion,taskDate
 "Project or Area
-syn match taskProject /^.\+:\s*$/ 
+syn match taskToday /^\*\+.\+:\s*$/ 
+syn match taskProject /^[^\*].\+:\s*$/ 
 syn match taskCode /\s\S\+:\s/ contained 
 "v0.1 version numbers
 syn match taskVersion /v\d\{1,2}\.\d\{1,2}\s\+/ contained
@@ -47,9 +48,10 @@ syn region taskFold start=/^.*:\s*$/ end=/^\s*$/ transparent fold
     "hi def link taskRaw PreProc
     hi def link taskPriority Special
     hi def link taskProject Identifier
+    hi def link taskToday PreProc
     hi def link taskCode Statement
     hi def link taskVersion Type
-    hi def link taskDate Error
+    hi def link taskDate PreProc
     hi def link taskWait Todo
 
 syn sync fromstart
