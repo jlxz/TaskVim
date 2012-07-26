@@ -72,18 +72,24 @@ function! s:TaskImportant()
 endfunction
 
 " Set up mappings
-noremap <unique> <script> <Plug>TaskDone        :call <SID>TaskDone()<CR>
-noremap <unique> <script> <Plug>TaskImportant   :call <SID>TaskImportant()<CR>
-noremap <unique> <script> <Plug>TaskWait        :call <SID>TaskWait()<CR>
+nmap <unique> <script> <Plug>TaskDone        :call <SID>TaskDone()<CR>
+nmap <unique> <script> <Plug>TaskImportant   :call <SID>TaskImportant()<CR>
+nmap <unique> <script> <Plug>TaskWait        :call <SID>TaskWait()<CR>
 
 if has("gui_macvim")
-    nmap <buffer> <silent> <Leader>2 <Plug>TaskDone
-    nmap <buffer> <silent> <Leader>3 <Plug>TaskImportant
-    nmap <buffer> <silent> <Leader>4 <Plug>TaskWait
+    nmap <silent> <Leader>2 <Plug>TaskDone
+    nmap <silent> <Leader>2 <Plug>TaskDone
+    nmap <silent> <Leader>3 <Plug>TaskImportant
+    "nmap <buffer> <silent> <Leader>4 <Plug>TaskWait
+    "nmap <buffer> <silent> <Leader>3 <Plug>TaskImportant
+    "nmap <buffer> <silent> <Leader>4 <Plug>TaskWait
 else
-    nmap <buffer> <silent> <F2> <Plug>TaskDone
-    nmap <buffer> <silent> <F3> <Plug>TaskImportant
-    nmap <buffer> <silent> <F4> <Plug>TaskWait
+    nmap <silent> <F2> <Plug>TaskDone
+    nmap <silent> <F2> <Plug>TaskDone
+    nmap <silent> <F3> <Plug>TaskImportant
+    "nmap <buffer> <silent> <F4> <Plug>TaskWait
+    "nmap <buffer> <silent> <F3> <Plug>TaskImportant
+    "nmap <buffer> <silent> <F4> <Plug>TaskWait
 endif
 
 " Autocreate list items
