@@ -71,23 +71,37 @@ function! s:TaskImportant()
     endif
 endfunction
 
+function! s:Today()
+    let line = getline(".")
+    if (line =~ '^\w\{9}:')
+        call setline(".", "*".line)
+        echo "today"
+    elseif (line =~'^\*\{1}\w\{9}:')
+        let line2 =substitute(line, "*", "", "")
+        call setline(".", line2)
+        echo "other day"
+    else
+        echo "It's not a valid date"
+    endif
+endfunction
+
 " Set up mappings
 nmap <unique> <script> <Plug>TaskDone        :call <SID>TaskDone()<CR>
 nmap <unique> <script> <Plug>TaskImportant   :call <SID>TaskImportant()<CR>
 nmap <unique> <script> <Plug>TaskWait        :call <SID>TaskWait()<CR>
+nmap <unique> <script> <Plug>Today           :call <SID>Today()<CR>
 
 if has("gui_macvim")
     nmap <silent> <Leader>2 <Plug>TaskDone
-    nmap <silent> <Leader>2 <Plug>TaskDone
     nmap <silent> <Leader>3 <Plug>TaskImportant
-    "nmap <buffer> <silent> <Leader>4 <Plug>TaskWait
+    nmap <silent> <Leader>4 <Plug>TaskWait
+    nmap <silent> <leader>5 <Plug>Today
     "nmap <buffer> <silent> <Leader>3 <Plug>TaskImportant
     "nmap <buffer> <silent> <Leader>4 <Plug>TaskWait
 else
     nmap <silent> <F2> <Plug>TaskDone
-    nmap <silent> <F2> <Plug>TaskDone
     nmap <silent> <F3> <Plug>TaskImportant
-    "nmap <buffer> <silent> <F4> <Plug>TaskWait
+    nmap <silent> <F4> <Plug>TaskWait
     "nmap <buffer> <silent> <F3> <Plug>TaskImportant
     "nmap <buffer> <silent> <F4> <Plug>TaskWait
 endif
