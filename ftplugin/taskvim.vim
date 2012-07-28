@@ -92,10 +92,10 @@ nmap <unique> <script> <Plug>TaskWait        :call <SID>TaskWait()<CR>
 nmap <unique> <script> <Plug>Today           :call <SID>Today()<CR>
 
 if has("gui_macvim")
-    nmap <silent> <Leader>2 <Plug>TaskDone
-    nmap <silent> <Leader>3 <Plug>TaskImportant
-    nmap <silent> <Leader>4 <Plug>TaskWait
-    nmap <silent> <leader>5 <Plug>Today
+    nnoremap <silent> <Leader>2 <Plug>TaskDone
+    nnoremap <silent> <Leader>3 <Plug>TaskImportant
+    nnoremap <silent> <Leader>4 <Plug>TaskWait
+    nnoremap <silent> <leader>5 <Plug>Today
     "nmap <buffer> <silent> <Leader>3 <Plug>TaskImportant
     "nmap <buffer> <silent> <Leader>4 <Plug>TaskWait
 else
