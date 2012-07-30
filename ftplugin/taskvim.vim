@@ -73,10 +73,10 @@ endfunction
 
 function! s:Today()
     let line = getline(".")
-    if (line =~ '^\w\{9}:')
+    if (line =~ '^\w\{3}_\w\{5}:')
         call setline(".", "*".line)
         echo "today"
-    elseif (line =~'^\*\{1}\w\{9}:')
+    elseif (line =~'^\*\{1}\w\{3}_\w\{5}:')
         let line2 =substitute(line, "*", "", "")
         call setline(".", line2)
         echo "other day"
@@ -102,7 +102,7 @@ endfunction
 function! s:UpToday()
     let tday = s:Today2TDF()
     call cursor(1,1)
-    call search('^*\{1}\w\{3}_\w\{5}:') 
+    call search('^\*\{1}\w\{3}_\w\{5}:') 
     silent call s:Today()
     call s:SearchDate(tday)
     silent call s:Today()
