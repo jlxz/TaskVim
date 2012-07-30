@@ -86,6 +86,7 @@ function! s:Today()
 endfunction
 
 function! s:SearchDate(date)
+    call cursor(1,1)
     let linenum = search(a:date)
     if (linenum == 0)
         echo "date not found"
@@ -98,17 +99,28 @@ function! s:Today2TDF()
     return strftime("%a_%d%b", localtime())
 endfunction
 
+function! s:UpToday()
+    let tday = s:Today2TDF()
+    call cursor(1,1)
+    call search('^*\{1}\w\{3}_\w\{5}:') 
+    silent call s:Today()
+    call s:SearchDate(tday)
+    silent call s:Today()
+    echom 'Today is' tday
+endfunction
+
 " Set up mappings
 nmap <unique> <script> <Plug>TaskDone        :call <SID>TaskDone()<CR>
 nmap <unique> <script> <Plug>TaskImportant   :call <SID>TaskImportant()<CR>
 nmap <unique> <script> <Plug>TaskWait        :call <SID>TaskWait()<CR>
 nmap <unique> <script> <Plug>Today           :call <SID>Today()<CR>
+nmap <unique> <script> <Plug>UpToday         :call <SID>UpToday()<CR>
 
 if has("gui_macvim")
-    nnoremap <silent> <Leader>2 <Plug>TaskDone
-    nnoremap <silent> <Leader>3 <Plug>TaskImportant
-    nnoremap <silent> <Leader>4 <Plug>TaskWait
-    nnoremap <silent> <leader>5 <Plug>Today
+    nmap <silent> <Leader>2 <Plug>TaskDone
+    nmap <silent> <Leader>3 <Plug>TaskImportant
+    nmap <silent> <Leader>4 <Plug>TaskWait
+    nmap <silent> <leader>5 <Plug>UpToday
     "nmap <buffer> <silent> <Leader>3 <Plug>TaskImportant
     "nmap <buffer> <silent> <Leader>4 <Plug>TaskWait
 else
