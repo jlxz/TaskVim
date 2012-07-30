@@ -85,6 +85,19 @@ function! s:Today()
     endif
 endfunction
 
+function! s:SearchDate(date)
+    let linenum = search(a:date)
+    if (linenum == 0)
+        echo "date not found"
+    else
+        return linenum
+    endif
+endfunction
+
+function! s:Today2TDF()
+    return strftime("%a_%d%b", localtime())
+endfunction
+
 " Set up mappings
 nmap <unique> <script> <Plug>TaskDone        :call <SID>TaskDone()<CR>
 nmap <unique> <script> <Plug>TaskImportant   :call <SID>TaskImportant()<CR>
