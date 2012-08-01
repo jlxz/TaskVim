@@ -96,7 +96,13 @@ function! s:SearchDate(date)
 endfunction
 
 function! s:Today2TDF()
-    return strftime("%a_%d%b", localtime())
+    let today = strftime("%a_%d%b", localtime())
+    if (strftime("%a", localtime()) == "mié")
+        let tday = substitute(today, "mié", "mie", "")
+    elseif (strftime("%a", localtime()) == "sáb")
+        let tday = substitute(today, "sáb", "sab", "")
+    endif
+    return tday
 endfunction
 
 function! s:UpToday()
@@ -142,6 +148,8 @@ setlocal autoindent
 setlocal textwidth=0
 setlocal wrapmargin=0
 setlocal nolist
+" Language to es_ES.UTF-8
+language es_ES.UTF-8
 
 "fold projects
 setlocal foldmethod=syntax
