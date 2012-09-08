@@ -99,10 +99,13 @@ function! s:Today2TDF()
     let today = strftime("%a_%d%b", localtime())
     if (strftime("%a", localtime()) == "mié")
         let tday = substitute(today, "mié", "mie", "")
+        return tday
     elseif (strftime("%a", localtime()) == "sáb")
         let tday = substitute(today, "sáb", "sab", "")
+        return tday
+    else
+        return today
     endif
-    return tday
 endfunction
 
 function! s:UpToday()
@@ -149,7 +152,7 @@ setlocal textwidth=0
 setlocal wrapmargin=0
 setlocal nolist
 " Language to es_ES.UTF-8
-language es_ES.UTF-8
+"language es_ES.UTF-8
 
 "fold projects
 setlocal foldmethod=syntax

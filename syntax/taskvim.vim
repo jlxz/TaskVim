@@ -26,6 +26,13 @@ syn match taskDone /+\s.*$/ "contains=taskTag,taskCode
 syn match taskWait /?\s.*$/ 
 "@tag or @context
 syn match taskTag  /@\S*/ contained
+"@tag header for a group tag or a group context
+syn match taskTagHeader  /^@.*/
+" cool header with text
+syn match taskHeader /^<\+—\+\w\+—\+>\+$/ contains=taskHeaderText
+syn match taskHeaderText /\w\+/ contained
+" cool separator
+syn match taskSeparator /^<\+—\+>\+$/
 " date to complete the task
 syn match taskDate /#\S*/ contained
 "* quick note or comment about the project/area
@@ -46,15 +53,20 @@ syn region taskFold start=/^.*:\s*$/ end=/^\s*$/ transparent fold
     hi def link taskChar Title
     hi def link taskDone Comment
     hi def link taskTag Constant
+    hi def link taskTagHeader Constant
     "hi def link taskRaw PreProc
     hi def link taskPriority Special
     hi def link taskDay Identifier
-    hi def link taskProject Underlined
-    hi def link taskToday PreProc
+    hi def link taskProject PreProc
+    hi def link taskToday Special
     hi def link taskCode Statement
     hi def link taskVersion Type
     hi def link taskDate PreProc
-    hi def link taskWait Todo
+    "hi def link taskWait Todo
+    hi def link taskWait Underlined
+    hi def link taskHeader PreProc
+    hi def link taskHeaderText Constant
+    hi def link taskSeparator Statement
 
 syn sync fromstart
 
