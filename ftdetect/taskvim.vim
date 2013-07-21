@@ -9,5 +9,7 @@
 " Last Change: 10/02/2012
  
 augroup taskvim
-     au! BufRead,BufNewFile *.taskvim.txt set filetype=taskvim
+     au! BufRead,BufNewFile *.taskvim.txt,*.tv.txt set filetype=taskvim
 augroup END
+
+

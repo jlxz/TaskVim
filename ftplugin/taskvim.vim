@@ -95,18 +95,29 @@ function! s:SearchDate(date)
     endif
 endfunction
 
-function! s:Today2TDF()
-    let today = strftime("%a_%d%b", localtime())
-    if (strftime("%a", localtime()) == "mié")
-        let tday = substitute(today, "mié", "mie", "")
-        return tday
-    elseif (strftime("%a", localtime()) == "sáb")
-        let tday = substitute(today, "sáb", "sab", "")
-        return tday
+function! s:ConvertDate(date)
+    let tvdate = strftime("%a_%d%b", a:date)
+    if (strftime("%a", a:date) == "mié")
+        return substitute(tvdate, "mié", "mie", "")
+    elseif (strftime("%a", a:date) == "sáb")
+        return substitute(tvdate, "sáb", "sab", "")
     else
-        return today
+        return tvdate
     endif
 endfunction
+
+
+function! s:Today2TDF()
+    let today = s:ConvertDate(localtime())
+    return today
+endfunction
+
+function! s:Day2TDF(day)
+    let daycmd = 'date -jf \%d\%b '. day .' +\%a' 
+    let weekday = system(expand(daycmd))
+    return weekday."_".day
+endfunction
+
 
 function! s:UpToday()
     let tday = s:Today2TDF()
@@ -118,18 +129,66 @@ function! s:UpToday()
     echom 'Today is' tday
 endfunction
 
+function! s:NextWeek()
+    let dayoffset = 7-strftime("%u", localtime())
+    for i in range(1,7)
+        let numday = localtime() + i*86400 + dayoffset*86400
+        let day = s:ConvertDate(numday)
+        put = day.':'
+        put =''
+    endfor
+    let cline = line('.')
+    call cursor(cline-12,0)
+endfunction)
+
+function! s:InsertSeparator()
+    put = '—————'
+endfunction
+
+function! s:InsertHeader()
+    put! = '#   #'
+    call cursor(0,3)
+endfunction
+
+function! s:InsertToday()
+    let today = s:Today2TDF()
+    put! = today.':'
+    put = ''
+endfunction
+
+function! s:NewJournal()
+    let journalDateFormat = "%Y_%m_%d_%A"
+    let journalPath = "/Volumes/HD/Dropbox/Data/journal/"
+    let l:fname = journalPath.''.strftime(journalDateFormat, localtime()).".tv.txt"
+    silent execute 'tabedit' l:fname
+    let todayJournal = strftime(journalDateFormat, localtime())
+    put! = '# '.todayJournal.' #'
+    put = ''
+    put = ''
+    echomsg 'New journal entry ' l:fname
+endfunction
+
 " Set up mappings
 nmap <unique> <script> <Plug>TaskDone        :call <SID>TaskDone()<CR>
 nmap <unique> <script> <Plug>TaskImportant   :call <SID>TaskImportant()<CR>
 nmap <unique> <script> <Plug>TaskWait        :call <SID>TaskWait()<CR>
-nmap <unique> <script> <Plug>Today           :call <SID>Today()<CR>
+nmap <unique> <script> <Plug>InsertToday     :call <SID>InsertToday()<CR>
 nmap <unique> <script> <Plug>UpToday         :call <SID>UpToday()<CR>
+nmap <unique> <script> <Plug>NextWeek        :call <SID>NextWeek()<CR>
+nmap <unique> <script> <Plug>InsertHeader    :call <SID>InsertHeader()<CR>
+nmap <unique> <script> <Plug>InsertSeparator :call <SID>InsertSeparator()<CR>
+nmap <unique> <script> <Plug>NewJournal      :call <SID>NewJournal()<CR>
 
 if has("gui_macvim")
     nmap <silent> <Leader>2 <Plug>TaskDone
     nmap <silent> <Leader>3 <Plug>TaskImportant
     nmap <silent> <Leader>4 <Plug>TaskWait
     nmap <silent> <leader>5 <Plug>UpToday
+    nmap <silent> <leader>6 <Plug>NextWeek
+    nmap <silent> <leader>7 <Plug>InsertToday
+    nmap <silent> <leader>8 <Plug>InsertHeader
+    nmap <silent> <leader>9 <Plug>InsertSeparator
+    nmap <silent> <leader>0 <Plug>NewJournal
     "nmap <buffer> <silent> <Leader>3 <Plug>TaskImportant
     "nmap <buffer> <silent> <Leader>4 <Plug>TaskWait
 else
@@ -141,8 +200,8 @@ else
 endif
 
 " Autocreate list items
-setlocal comments+=b:—,
-setlocal formatoptions=qro1
+setlocal comments+=b:—,b:•,b:·,
+setlocal formatoptions=qrno1
 "add '@' to keyword character set so that we can complete contexts as keywords
 setlocal iskeyword+=@-@
 " Set up list formating 

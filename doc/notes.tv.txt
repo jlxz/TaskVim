@@ -1,0 +1,45 @@
+# notes #
+Format and Elements
+
+Main Header:
+Special Header 1_
+Special Header 2__
+
+1. ordered lists
+2. second element
+
+    1. tab list
+        1a. with subelements
+    2. and other elements
+        2a. more subelements
+        2b. even more
+
+* unordered lists
+* with several elements
+
+· different bullets
+• even more bullets
+
+    * also tabbed
+    • you know
+
+supports: keys and values
+    keys: values
+        more keys: and values
+
+cool separators >> like this
+line separators like
+—————
+
+also urls http://www.joseluisdgz.com
+http://goodbye.com
+
+—————
+
+(parenthesis)
+[brackets]
+@tag 
+:2013
+
+
+
